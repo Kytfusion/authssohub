@@ -4,62 +4,50 @@ namespace App\Services;
 
 use App\Mapping\SchemeMapping;
 use App\Schemes\ProfileScheme;
-use App\Models\ProfileModel;
 
 class ProfileService extends SchemeMapping
 {
-    public array $profileScheme    = [];
-    public array $profileFields    = [];
-    public array $profileMigration = [];
-    public array $profileValidate = [];
+    public array $scheme    = [];
+    public array $fields    = [];
+    public array $migration = [];
+    public array $validate  = [];
 
     public function __construct()
     {
-        $this->setProfileScheme();
-        $this->setProfileFields();
-        $this->setProfileMigration();
-        $this->setProfileValidate();
+        $this->setScheme();
+        $this->setFields();
+        $this->setMigration();
+        $this->setValidate();
     }
 
-    private function setProfileScheme(): void
+    private function setScheme(): void
     {
-        $profileSchemeInstance = new ProfileScheme();
-        $this->profileScheme   = $profileSchemeInstance->getScheme();
+        $this->scheme = app(ProfileScheme::class)->getScheme();
     }
 
-    private function setProfileFields(): void
+    private function setFields(): void
     {
-        foreach ($this->profileScheme as $item) {
-            $this->profileFields[] = $item[self::SCHEME0];
+        foreach ($this->scheme as $item) {
+            $this->fields[] = $item[self::SCHEME0];
         }
     }
 
-    private function setProfileMigration(): void
+    private function setMigration(): void
     {
-        foreach ($this->profileScheme as $item) {
-            $this->profileMigration[] = [
-                SchemeMapping::SCHEME1 => $item[SchemeMapping::SCHEME1],
-                SchemeMapping::SCHEME0 => $item[SchemeMapping::SCHEME0],
-                SchemeMapping::SCHEME4 => $item[SchemeMapping::SCHEME4],
-                SchemeMapping::SCHEME3 => $item[SchemeMapping::SCHEME3],
-                SchemeMapping::SCHEME5 => $item[SchemeMapping::SCHEME5],
-            ];
+        foreach ($this->scheme as $item) {
+            $this->migration[] = $item;
         }
     }
 
-    private function setProfileValidate(): void
+    private function setValidate(): void
     {
-        foreach ($this->profileScheme as $item) {
-            $this->profileValidate[] = [
+        foreach ($this->scheme as $item) {
+            $this->validate[] = [
                 $item[SchemeMapping::SCHEME0] => $item[SchemeMapping::SCHEME5],
             ];
         }
 
-        $this->profileValidate = array_merge(...$this->profileValidate);
+        $this->validate = array_merge(...$this->validate);
     }
 
-    public function createOptionsForProfile(ProfileModel $profile): void
-    {
-        $profile->options()->create([]);
-    }
 }

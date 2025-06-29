@@ -4,6 +4,17 @@ namespace App\Mapping;
 
 trait FieldsMapping
 {
+    public const FIELD26 = 'email';
+    public const FIELD27 = 'password';
+
+
+
+
+
+
+
+
+
     public const FIELD0 = 'name';
     public const FIELD1 = 'gender';
     public const FIELD2 = 'birth';
@@ -30,8 +41,6 @@ trait FieldsMapping
     public const FIELD23 = 'disable_distance';
     public const FIELD24 = 'empty_description';
     public const FIELD25 = 'policy';
-    public const FIELD26 = 'email';
-    public const FIELD27 = 'password';
     public const FIELD28 = 'reset_code_expires';
     public const FIELD29 = 'reset_code';
     public const FIELD30 = 'type';
@@ -45,12 +54,6 @@ trait FieldsMapping
     public const FIELD38 = 'profile_id';
     public const FIELD39 = 'access_token';
     public const FIELD40 = 'environment';
-
-
-
-
-
-
 
 
 

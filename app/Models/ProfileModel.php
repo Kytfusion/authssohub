@@ -3,9 +3,7 @@
 namespace App\Models;
 
 use App\Mapping\FieldsMapping;
-use App\Mapping\SchemeMapping;
 use App\Mapping\TablesMapping;
-use App\Services\BiographyService;
 use App\Services\ProfileService;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -25,8 +23,9 @@ class ProfileModel extends Model implements JWTSubject, AuthenticatableContract
     public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);
-        $profileService = new ProfileService();
-        $this->fillable = $profileService->profileFields;
+        $service = new ProfileService();
+        
+        $this->fillable = $service->fields;
     }
 
     public function getJWTIdentifier()

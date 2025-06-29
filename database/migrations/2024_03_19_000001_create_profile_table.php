@@ -14,12 +14,12 @@ return new class extends Migration {
 
     public function up()
     {
-        $profileService = app(ProfileService::class);
+        $service = app(ProfileService::class);
 
-        Schema::create(TablesMapping::TABLE0, function (Blueprint $table) use ($profileService) {
+        Schema::create(TablesMapping::TABLE0, function (Blueprint $table) use ($service) {
             $table->id();
 
-            foreach ($profileService->profileMigration as $item) {
+            foreach ($service->migration as $item) {
                 $table->{$item[SchemeMapping::SCHEME1]}($item[SchemeMapping::SCHEME0])->{$item[SchemeMapping::SCHEME4]}($item[SchemeMapping::SCHEME3]);
             }
 
