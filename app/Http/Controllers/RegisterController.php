@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Core\ProfileCore;
-use App\Mapping\TablesMapping;
-use Tymon\JWTAuth\Facades\JWTAuth;
 
 class RegisterController extends Controller
 {
@@ -14,8 +12,13 @@ class RegisterController extends Controller
         try {
             $profileCore->createProfile();
 
+            $profileCore->set_refreshToken();
+            $profileCore->set_accessToken();
+
             return response()->json([
-                $profileCore->user
+                'access_token' => $profileCore->accessToken,
+                'refresh_token' => $profileCore->refreshToken,
+                'user' => $profileCore->user,
             ], 201);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);

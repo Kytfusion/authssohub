@@ -8,6 +8,7 @@ use App\Models\ProfileModel;
 use App\Services\ProfileService;
 use Exception;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 class ProfileCore
@@ -15,6 +16,9 @@ class ProfileCore
     use FieldsMapping;
 
     public $user;
+
+    public $refreshToken;
+    public $accessToken;
 
     public function createProfile()
     {
@@ -38,6 +42,34 @@ class ProfileCore
         $model->save();
 
         $this->user = $model;
+    }
+
+    public function set_refreshToken()
+    {
+        if (!$this->user) {
+            $this->refreshToken = null;
+            throw new Exception('User not exists');
+        }
+
+        $this->refreshToken = JWTAuth::customClaims([
+            'type'   => 'refresh',
+            'random' => Str::random(32),
+            'exp'    => now()->addMonths(12)->timestamp
+        ])->fromUser($this->user);
+    }
+
+    public function set_accessToken()
+    {
+        if (!$this->refreshToken) {
+            $this->accessToken = null;
+            throw new Exception('Empty refresh token');
+        }
+
+        $this->accessToken = JWTAuth::customClaims([
+            'exp' => now()->addHours(24)->timestamp
+        ])->fromUser(
+            JWTAuth::setToken($this->refreshToken)->authenticate()
+        );
     }
 
 //    public function getUserByEmail()
