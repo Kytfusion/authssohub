@@ -38,20 +38,4 @@ class ProfileModel extends Model implements JWTSubject, AuthenticatableContract
     {
         return [];
     }
-
-    // nu e clar, probabil tre sters
-    public function bio()
-    {
-        return $this->hasOne(BiographyModel::class, self::FIELD38);
-    }
-
-    public function biography()
-    {
-        return $this->hasOne(BiographyModel::class, self::FIELD38);
-    }
-
-    public function options()
-    {
-        return $this->hasOne(OptionModel::class, self::FIELD38);
-    }
 }

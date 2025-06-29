@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services;
+namespace App\Core;
 
 use App\Mapping\FieldsMapping;
 use App\Mapping\TablesMapping;
@@ -9,7 +9,7 @@ use Exception;
 use Illuminate\Support\Facades\Hash;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
-class UserService
+class ProfileCore
 {
     use FieldsMapping;
 
