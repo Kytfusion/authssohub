@@ -1,0 +1,11 @@
+html, body {
+    margin: 0;
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    /*background: url('../media/dashboard.jpg') no-repeat center center fixed;*/
+    /*background-size: cover;*/
+    background-color: #F4F7FE;
+}

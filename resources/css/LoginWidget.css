@@ -1,0 +1,98 @@
+.login-widget {
+    display: flex;
+    width: 330px; /* Lățimea dorită */
+    height: 130px; /* Înălțimea dorită */
+    border: none;
+    border-radius: 12px;
+    overflow: hidden;
+    background: linear-gradient(135deg, #f5f7fa, #c3cfe2); /* Gradient pentru un aspect modern */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Umbră pentru adâncime */
+    font-family: 'Arial', sans-serif; /* Font modern și curat */
+    margin: 20px; /* Margini pentru centrat */
+}
+
+.left-section {
+    flex: 2;
+    padding: 15px;
+    border-right: 1px solid #e1e8ee; /* Linie subțire și deschisă */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.right-section {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff; /* Fundal alb pentru contrast */
+}
+
+.title {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.icon {
+    width: 28px; /* Mărime mai mare pentru iconiță */
+    height: 28px;
+    margin-right: 12px;
+    filter: grayscale(100%) brightness(90%); /* Iconiță cu efect de alb-negru și luminositate */
+}
+
+h2 {
+    margin: 0;
+    font-size: 16px; /* Dimensiune text moderată */
+    color: #333; /* Culoare text contrastantă */
+}
+
+.filters {
+    margin: 10px 0;
+    display: flex;
+    gap: 8px;
+}
+
+.filter-button {
+    background: #f4f4f4;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 14px;
+    color: #333;
+    transition: background 0.3s ease;
+}
+
+.filter-button.active {
+    background: #c3cfe2;
+    color: #fff;
+}
+
+.filter-button:hover {
+    background: #c3cfe2;
+    color: #fff;
+}
+
+.filter-button.disabled {
+    cursor: not-allowed; /* Indică că butonul este dezactivat */
+    background: #ddd; /* Fundal mai deschis pentru butonul dezactivat */
+    color: #aaa; /* Text mai deschis pentru butonul dezactivat */
+    pointer-events: none; /* Dezactivează interacțiunea cu butonul */
+}
+
+.date {
+    font-size: 14px;
+    color: #666; /* Text mai deschis pentru data */
+}
+
+.number {
+    font-size: 32px; /* Dimensiune mai mare pentru număr */
+    font-weight: bold;
+    color: #333;
+}
+
+.filter-button.hover {
+    background: #c3cfe2;
+    color: #fff;
+}
