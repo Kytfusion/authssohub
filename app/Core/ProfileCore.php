@@ -42,9 +42,12 @@ class ProfileCore
         $model->save();
 
         $this->user = $model;
+
+        $this->new_refreshToken();
+        $this->new_accessToken();
     }
 
-    public function set_refreshToken()
+    public function new_refreshToken()
     {
         if (!$this->user) {
             $this->refreshToken = null;
@@ -58,7 +61,7 @@ class ProfileCore
         ])->fromUser($this->user);
     }
 
-    public function set_accessToken()
+    public function new_accessToken()
     {
         if (!$this->refreshToken) {
             $this->accessToken = null;

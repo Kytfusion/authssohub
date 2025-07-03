@@ -27,6 +27,14 @@ class ProfileScheme
                 SchemeMapping::SCHEME3 => 'empty',
                 SchemeMapping::SCHEME4 => 'default',
                 SchemeMapping::SCHEME5 => 'required|min:6',
+            ],
+            [
+                SchemeMapping::SCHEME0 => self::FIELD41,
+                SchemeMapping::SCHEME1 => 'string',
+                SchemeMapping::SCHEME2 => 'empty',
+                SchemeMapping::SCHEME3 => 'empty',
+                SchemeMapping::SCHEME4 => 'default',
+                SchemeMapping::SCHEME5 => 'empty',
             ]
         ];
     }

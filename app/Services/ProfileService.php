@@ -7,16 +7,14 @@ use App\Schemes\ProfileScheme;
 
 class ProfileService extends SchemeMapping
 {
-    public array $scheme    = [];
-    public array $fields    = [];
-    public array $migration = [];
-    public array $validate  = [];
+    public array $scheme   = [];
+    public array $fields   = [];
+    public array $validate = [];
 
     public function __construct()
     {
         $this->setScheme();
         $this->setFields();
-        $this->setMigration();
         $this->setValidate();
     }
 
@@ -32,19 +30,10 @@ class ProfileService extends SchemeMapping
         }
     }
 
-    private function setMigration(): void
-    {
-        foreach ($this->scheme as $item) {
-            $this->migration[] = $item;
-        }
-    }
-
     private function setValidate(): void
     {
         foreach ($this->scheme as $item) {
-            $this->validate[] = [
-                $item[SchemeMapping::SCHEME0] => $item[SchemeMapping::SCHEME5],
-            ];
+            $this->validate[] = [$item[SchemeMapping::SCHEME0] => $item[SchemeMapping::SCHEME5]];
         }
 
         $this->validate = array_merge(...$this->validate);

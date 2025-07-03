@@ -19,7 +19,7 @@ return new class extends Migration {
         Schema::create(TablesMapping::TABLE0, function (Blueprint $table) use ($service) {
             $table->id();
 
-            foreach ($service->migration as $item) {
+            foreach ($service->scheme as $item) {
                 $table->{$item[SchemeMapping::SCHEME1]}($item[SchemeMapping::SCHEME0])->{$item[SchemeMapping::SCHEME4]}($item[SchemeMapping::SCHEME3]);
             }
 

@@ -20,11 +20,11 @@ class ProfileModel extends Model implements JWTSubject, AuthenticatableContract
     protected $table    = TablesMapping::TABLE0;
     protected $fillable = [];
 
-    public function __construct(array $attributes = [])
-    {
+    public function __construct(
+        array $attributes = []
+    ) {
         parent::__construct($attributes);
-        $service = new ProfileService();
-        
+        $service        = app(ProfileService::class);
         $this->fillable = $service->fields;
     }
 
