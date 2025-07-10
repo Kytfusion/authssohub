@@ -4,13 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Core\ProfileCore;
 
-class RegisterController extends Controller
+class LoginController extends Controller
 {
-    public function register(
+    public function login(
         ProfileCore $profileCore,
     ) {
         try {
-            $profileCore->register_user();
+            $profileCore->login_user();
 
             return response()->json([
                 'access_token' => $profileCore->accessToken,

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Mapping\RoutesMapping;
 use Illuminate\Support\Facades\Route;
@@ -16,3 +17,4 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::post('/'.RoutesMapping::ROUTE0, [RegisterController::class, 'register']);
+Route::post('/'.RoutesMapping::ROUTE1, [LoginController::class, 'login']);

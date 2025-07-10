@@ -16,11 +16,10 @@ class ProfileCore
     use FieldsMapping;
 
     public $user;
-
     public $refreshToken;
     public $accessToken;
 
-    public function createProfile()
+    public function register_user()
     {
         /** @var ProfileService $profileService */
         $profileService = app(ProfileService::class);
@@ -38,16 +37,44 @@ class ProfileCore
 
         $model->{self::FIELD26} = $credentials[self::FIELD26];
         $model->{self::FIELD27} = Hash::make($credentials[self::FIELD27]);
-
         $model->save();
 
         $this->user = $model;
 
         $this->new_refreshToken();
         $this->new_accessToken();
+
+        $model->{self::FIELD41} = $this->refreshToken;
+        $model->save();
     }
 
-    public function new_refreshToken()
+    public function login_user()
+    {
+        /** @var ProfileService $profileService */
+        $profileService = app(ProfileService::class);
+
+        $credentials = request()->validate($profileService->validate);
+
+        $user = ProfileModel::where(self::FIELD26, $credentials[self::FIELD26])->first();
+
+        if (!$user) {
+            $this->user = null;
+            throw new Exception('Failed authenticate');
+        }
+
+        if (!Hash::check($credentials[self::FIELD27], $user->{self::FIELD27})) {
+            $this->user = null;
+            throw new Exception('Failed authenticate');
+        }
+
+        $this->user = $user;
+
+        $this->refreshToken = $user->{self::FIELD41};
+
+        $this->new_accessToken();
+    }
+
+    private function new_refreshToken()
     {
         if (!$this->user) {
             $this->refreshToken = null;
@@ -55,13 +82,12 @@ class ProfileCore
         }
 
         $this->refreshToken = JWTAuth::customClaims([
-            'type'   => 'refresh',
-            'random' => Str::random(32),
-            'exp'    => now()->addMonths(12)->timestamp
+            'type' => 'refresh',
+            'exp'  => now()->addMonths(12)->timestamp
         ])->fromUser($this->user);
     }
 
-    public function new_accessToken()
+    private function new_accessToken()
     {
         if (!$this->refreshToken) {
             $this->accessToken = null;
@@ -69,7 +95,8 @@ class ProfileCore
         }
 
         $this->accessToken = JWTAuth::customClaims([
-            'exp' => now()->addHours(24)->timestamp
+            'type' => 'access',
+            'exp'  => now()->addHours(24)->timestamp
         ])->fromUser(
             JWTAuth::setToken($this->refreshToken)->authenticate()
         );

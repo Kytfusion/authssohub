@@ -30,10 +30,10 @@ class ProfileScheme
             ],
             [
                 SchemeMapping::SCHEME0 => self::FIELD41,
-                SchemeMapping::SCHEME1 => 'string',
+                SchemeMapping::SCHEME1 => 'text',
                 SchemeMapping::SCHEME2 => 'empty',
-                SchemeMapping::SCHEME3 => 'empty',
-                SchemeMapping::SCHEME4 => 'default',
+                SchemeMapping::SCHEME3 => 'change',
+                SchemeMapping::SCHEME4 => 'nullable',
                 SchemeMapping::SCHEME5 => 'empty',
             ]
         ];
