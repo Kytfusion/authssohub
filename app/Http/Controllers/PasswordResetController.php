@@ -15,34 +15,34 @@ class PasswordResetController extends Controller
 {
     use FieldsMapping;
 
-    public function sendCode(
-        UserService $userService
-    ) {
-        $userService->getUserByEmail();
-
-        if (!$userService->user) {
-            return response()->json(['message' => 'User not found.'], 404);
-        }
-
-        $resetCode = rand(100000, 999999);
-
-        $userService->setFieldValue(TablesMapping::TABLE0, self::FIELD29, $resetCode);
-        $userService->setFieldValue(TablesMapping::TABLE0, self::FIELD28, now()->addMinutes(15));
-
-        try {
-            Mail::raw(
-                "Your password reset code is: $resetCode",
-                function ($message) use ($userService) {
-                    $message->to($userService->user->{self::FIELD26})
-                        ->subject('Password Reset Code')
-                        ->from(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME'));
-                });
-        } catch (\Exception $e) {
-            return response()->json(['message' => 'Failed to send reset code email.'], 500);
-        }
-
-        return response()->json(['message' => 'Password reset code sent to email.'], 200);
-    }
+//    public function sendCode(
+//        UserService $userService
+//    ) {
+//        $userService->getUserByEmail();
+//
+//        if (!$userService->user) {
+//            return response()->json(['message' => 'User not found.'], 404);
+//        }
+//
+//        $resetCode = rand(100000, 999999);
+//
+//        $userService->setFieldValue(TablesMapping::TABLE0, self::FIELD29, $resetCode);
+//        $userService->setFieldValue(TablesMapping::TABLE0, self::FIELD28, now()->addMinutes(15));
+//
+//        try {
+//            Mail::raw(
+//                "Your password reset code is: $resetCode",
+//                function ($message) use ($userService) {
+//                    $message->to($userService->user->{self::FIELD26})
+//                        ->subject('Password Reset Code')
+//                        ->from(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME'));
+//                });
+//        } catch (\Exception $e) {
+//            return response()->json(['message' => 'Failed to send reset code email.'], 500);
+//        }
+//
+//        return response()->json(['message' => 'Password reset code sent to email.'], 200);
+//    }
 
     public function verifyCode(
         Request $request,

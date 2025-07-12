@@ -7,6 +7,8 @@ trait FieldsMapping
     public const FIELD26 = 'email';
     public const FIELD27 = 'password';
     public const FIELD41 = 'refresh_token';
+    public const FIELD42 = 'reset_code';
+    public const FIELD43 = 'reset_code_expires';
 
 
 

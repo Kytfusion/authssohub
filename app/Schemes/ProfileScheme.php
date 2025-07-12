@@ -35,6 +35,22 @@ class ProfileScheme
                 SchemeMapping::SCHEME3 => 'change',
                 SchemeMapping::SCHEME4 => 'nullable',
                 SchemeMapping::SCHEME5 => 'empty',
+            ],
+            [
+                SchemeMapping::SCHEME0 => self::FIELD42,
+                SchemeMapping::SCHEME1 => 'integer',
+                SchemeMapping::SCHEME2 => null,
+                SchemeMapping::SCHEME3 => json_encode([]),
+                SchemeMapping::SCHEME4 => 'nullable',
+                SchemeMapping::SCHEME5 => 'nullable|numeric|digits:6',
+            ],
+            [
+                SchemeMapping::SCHEME0 => self::FIELD43,
+                SchemeMapping::SCHEME1 => 'timestamp',
+                SchemeMapping::SCHEME2 => json_encode([]),
+                SchemeMapping::SCHEME3 => json_encode([]),
+                SchemeMapping::SCHEME4 => 'nullable',
+                SchemeMapping::SCHEME5 => 'nullable',
             ]
         ];
     }
